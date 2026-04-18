@@ -23,10 +23,10 @@ process IQTREE {
 
     script:
     """
-    iqtree2 \\
+    iqtree3 \\
         -s  "${alignment}" \\
         --prefix "${taxon}" \\
-        -m  TEST \\
+        -m  MFP \\
         -B  ${bootstrap} \\
         --bnni \\
         -T  ${task.cpus} \\
