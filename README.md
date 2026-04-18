@@ -114,8 +114,6 @@ phylogenomics/<taxon>/
 | Panaroo | 1.6.0 | `depot.galaxyproject.org/singularity/panaroo:1.6.0--pyhdfd78af_0` |
 | IQ-TREE3 | 3.1.1 | `depot.galaxyproject.org/singularity/iqtree:3.1.1--hde5307d_1` |
 
-Images are cached to `~/singularity_images/` on Snellius.
-
 ---
 
 ## Notes
