@@ -1,6 +1,6 @@
 # Phylogenomics pipeline
 
-**Bakta → Panaroo → IQ-TREE2**
+**Bakta → Panaroo → IQ-TREE3**
 
 Builds a maximum-likelihood core-gene phylogeny from high-quality MAG bins.
 If Bakta GFF3 annotations already exist (parabacteroides, senegalimassilia, alistipes),
@@ -24,22 +24,27 @@ workflows/phylo/
 
 ## Quick start
 
-### 1 — Generate Bakta GFF3 samplesheets (once)
+### 1 — Prepare a samplesheet
 
-If Bakta annotations have already been run (e.g. from the annotation pipeline),
-generate the GFF3 samplesheets so the phylo pipeline can find them:
+**With pre-existing Bakta GFF3s** (`--bakta_input true`):
 
-```bash
-cd /projects/prjs1784/heliuspaired
-python3 scripts/phylo/make_bakta_samplesheet.py
+```csv
+sample,gff3
+bin_001,annotation/bakta/bin_001.gff3
+bin_002,annotation/bakta/bin_002.gff3
+bin_003,annotation/bakta/bin_003.gff3
 ```
 
-This produces:
-- `data/parabacteroides_bakta_samplesheet.csv`
-- `data/senegalimassilia_bakta_samplesheet.csv`
-- `data/alistipes_bakta_samplesheet.csv`
+**Without existing annotations** (`--bakta_input false`, Bakta will run first):
 
-Only samples present in the corresponding `*_samplesheet_filtered.csv` are included.
+```csv
+sample,fasta
+bin_001,data/bins/bin_001.fa
+bin_002,data/bins/bin_002.fa
+bin_003,data/bins/bin_003.fa
+```
+
+Paths in the `gff3` / `fasta` column are relative to `--base_dir`.
 
 ### 2 — Run the pipeline
 
@@ -67,15 +72,6 @@ nextflow run main.nf \
 ```
 
 Add `-resume` to restart from the last successful step after any failure.
-
----
-
-## Samplesheet formats
-
-| Mode | Columns | Example |
-|---|---|---|
-| Pre-existing GFF3s (`--bakta_input true`) | `sample,gff3` | `data/parabacteroides_bakta_samplesheet.csv` |
-| Run Bakta (`--bakta_input false`) | `sample,fasta` | `data/parabacteroides_samplesheet_filtered.csv` |
 
 ---
 
@@ -116,7 +112,7 @@ phylogenomics/<taxon>/
 |---|---|---|
 | Bakta | 1.10.4 | `depot.galaxyproject.org/singularity/bakta:1.10.4--pyhdfd78af_0` |
 | Panaroo | 1.6.0 | `depot.galaxyproject.org/singularity/panaroo:1.6.0--pyhdfd78af_0` |
-| IQ-TREE2 | 3.1.1 | `depot.galaxyproject.org/singularity/iqtree:3.1.1--hde5307d_1` |
+| IQ-TREE3 | 3.1.1 | `depot.galaxyproject.org/singularity/iqtree:3.1.1--hde5307d_1` |
 
 Images are cached to `~/singularity_images/` on Snellius.
 
