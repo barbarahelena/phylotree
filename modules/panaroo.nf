@@ -7,8 +7,8 @@ process PANAROO {
     container "https://depot.galaxyproject.org/singularity/panaroo%3A1.6.0--pyhdfd78af_0"
 
     cpus   16
-    memory '64 GB'
-    time   '12 h'
+    memory '10 GB'
+    time   '2 h'
 
     input:
     path gffs          // all GFF files collected into the work dir

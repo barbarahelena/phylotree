@@ -7,7 +7,7 @@ process IQTREE {
     container "https://depot.galaxyproject.org/singularity/iqtree%3A3.1.1--hde5307d_1"
 
     cpus   16
-    memory '32 GB'
+    memory '8 GB'
     time   '6 h'
 
     input:
@@ -26,7 +26,7 @@ process IQTREE {
     iqtree3 \\
         -s  "${alignment}" \\
         --prefix "${taxon}" \\
-        -m  MFP \\
+        -m  GTR+I+G4 \\
         -B  ${bootstrap} \\
         --bnni \\
         -T  ${task.cpus} \\
